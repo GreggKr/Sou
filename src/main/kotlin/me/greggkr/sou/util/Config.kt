@@ -4,7 +4,7 @@ import java.io.FileInputStream
 import java.util.*
 
 class Config {
-    val props = Properties()
+    private val props = Properties()
 
     fun load() {
         val fis = FileInputStream("config.properties")
