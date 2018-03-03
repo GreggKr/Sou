@@ -23,8 +23,6 @@ fun Array<String>.main() {
             .setToken(config.getProperty("token"))
             .setGame(Game.of(Game.GameType.WATCHING, "people play osu!"))
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
-            .addEventListener(
-                    CommandListener(commandHandler)
-            )
+            .addEventListener(CommandListener(commandHandler))
             .buildBlocking()
 }
