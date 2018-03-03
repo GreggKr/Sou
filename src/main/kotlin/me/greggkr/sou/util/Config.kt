@@ -1,4 +1,4 @@
-package util
+package me.greggkr.sou.util
 
 import java.io.FileInputStream
 import java.util.*
