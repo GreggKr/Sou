@@ -1,18 +1,12 @@
 package me.greggkr.sou.util
 
-import java.io.FileInputStream
-import java.util.*
+import com.natpryce.konfig.PropertyGroup
+import com.natpryce.konfig.getValue
+import com.natpryce.konfig.stringType
 
 class Config {
-    private val props = Properties()
-
-    fun load() {
-        val fis = FileInputStream("config.properties")
-        props.load(fis)
-        fis.close()
-    }
-
-    fun getProperty(key: String): String {
-        return props.getProperty(key)
+    object bot : PropertyGroup() {
+        val discordToken by stringType
+        val osuToken by stringType
     }
 }

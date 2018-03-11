@@ -1,4 +1,4 @@
-package me.greggkr.sou.util.osu
+package me.greggkr.sou.osu
 
 enum class Mode(val apiValue: Int) {
     STANDARD(0),

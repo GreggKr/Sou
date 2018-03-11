@@ -3,9 +3,9 @@ package me.greggkr.sou.commands.osu
 import me.diax.comportment.jdacommand.Command
 import me.diax.comportment.jdacommand.CommandDescription
 import me.greggkr.sou.Sou
+import me.greggkr.sou.osu.Mode
+import me.greggkr.sou.osu.wrappers.User
 import me.greggkr.sou.util.Emoji
-import me.greggkr.sou.util.osu.Mode
-import me.greggkr.sou.util.osu.wrappers.User
 import net.dv8tion.jda.core.entities.Message
 
 @CommandDescription(name = "user", triggers = [

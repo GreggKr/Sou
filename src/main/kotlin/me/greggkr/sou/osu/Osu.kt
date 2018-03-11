@@ -1,10 +1,8 @@
-package me.greggkr.sou.util
+package me.greggkr.sou.osu
 
 import com.google.gson.GsonBuilder
-import me.greggkr.sou.Sou
 import me.greggkr.sou.auth.OsuAuthenticator
-import me.greggkr.sou.util.osu.Mode
-import me.greggkr.sou.util.osu.wrappers.User
+import me.greggkr.sou.osu.wrappers.User
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
@@ -13,7 +11,7 @@ class Osu(key: String) {
     private val baseUrl = "https://osu.ppy.sh/api"
     private val gson = GsonBuilder().setPrettyPrinting().create()
     val client: OkHttpClient = OkHttpClient.Builder()
-            .authenticator(OsuAuthenticator(Sou.config.getProperty("osu-token")))
+            .authenticator(OsuAuthenticator(key))
             .build()
 
     fun getUser(mode: Mode, name: String): User? {
