@@ -1,7 +1,9 @@
 package me.greggkr.sou.util
 
 import me.diax.comportment.jdacommand.Command
-import me.greggkr.sou.commands.InfoCommand
+import me.greggkr.sou.commands.info.InfoCommand
+import me.greggkr.sou.commands.info.StatsCommand
+import me.greggkr.sou.commands.osu.ProfilePictureCommand
 import me.greggkr.sou.commands.osu.UserCommand
 
 class CommandReg {
@@ -10,7 +12,9 @@ class CommandReg {
     init {
         register(
                 InfoCommand(),
-                UserCommand()
+                StatsCommand(),
+                UserCommand(),
+                ProfilePictureCommand()
         )
     }
 
