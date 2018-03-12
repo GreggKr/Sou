@@ -15,12 +15,24 @@ import java.io.File
 
 class Sou {
     companion object {
+        var startTime: Long = Long.MIN_VALUE
         lateinit var jda: JDA
         lateinit var osu: Osu
         lateinit var config: ConfigurationProperties
+
+        fun getUptime(): String {
+            val uptime = System.currentTimeMillis() - startTime
+            val s = uptime / 1000
+            val m = if (s >= 60) s / 60 else 0
+            val h = if (m >= 60) m / 60 else 0
+            val d = if (h >= 60) h / 60 else 0
+
+            return "${d}d:${h}h:${m}m:${s}s"
+        }
     }
 
     fun start() {
+        startTime = System.currentTimeMillis()
         config = ConfigurationProperties.fromFile(File("config.properties"))
         osu = Osu(config[Config.bot.osuToken])
 
