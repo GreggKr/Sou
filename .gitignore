@@ -121,3 +121,7 @@ gradle-app.setting
 
 .idea/
 config.properties
+
+
+# cached pfps
+cache/
