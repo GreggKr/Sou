@@ -16,7 +16,7 @@
         </filter>
         <file>logs/sou.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/sou-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/sou-%d{mm.dd.year}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -31,7 +31,7 @@
             <level>ERROR</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/error-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/error-%d{mm.dd.year}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -46,7 +46,7 @@
             <level>ERROR</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/jda/error-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/jda/error-%d{mm.dd.year}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -61,7 +61,7 @@
             <level>DEBUG</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/jda/debug-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/jda/debug-%d{mm.dd.year}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>

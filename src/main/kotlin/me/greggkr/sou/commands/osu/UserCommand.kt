@@ -39,11 +39,12 @@ class UserCommand : Command {
         message.channel.sendMessage(EmbedBuilder()
                 .setColor(Data.color)
                 .setThumbnail(Sou.osu.getProfilePicture(a))
-                .addField("Info", "Name: ${user.name}\n" +
-                        "PP: ${decFormat.format(user.pp)}\n" +
-                        "Rank: ${user.rank}\n" +
-                        "Rank in ${user.country}: ${user.countryRank}\n" +
-                        "Acc: ${decFormat.format(user.accuracy)}%", true)
+                .addField("Info", "**Name**: ${user.name}\n" +
+                        "**PP**: ${decFormat.format(user.pp)}\n" +
+                        "**Rank**: ${user.rank}\n" +
+                        "**Level**: ${decFormat.format(user.level)}\n" +
+                        "**Rank in ${user.country}**: ${user.countryRank}\n" +
+                        "**Acc**: ${decFormat.format(user.accuracy)}%\n", true)
                 .build()).queue()
     }
 }
