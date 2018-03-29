@@ -2,10 +2,12 @@ package me.greggkr.sou
 
 import com.natpryce.konfig.ConfigurationProperties
 import me.diax.comportment.jdacommand.CommandHandler
+import me.greggkr.sou.frc.TBA
 import me.greggkr.sou.listeners.CommandListener
 import me.greggkr.sou.osu.Osu
 import me.greggkr.sou.util.CommandReg
 import me.greggkr.sou.util.Config
+import me.greggkr.sou.util.Data
 import net.dv8tion.jda.core.AccountType
 import net.dv8tion.jda.core.JDA
 import net.dv8tion.jda.core.JDABuilder
@@ -18,6 +20,7 @@ class Sou {
         var startTime: Long = Long.MIN_VALUE
         lateinit var jda: JDA
         lateinit var osu: Osu
+        lateinit var tba: TBA
         lateinit var config: ConfigurationProperties
 
         fun getUptime(): String {
@@ -35,10 +38,13 @@ class Sou {
         startTime = System.currentTimeMillis()
         config = ConfigurationProperties.fromFile(File("config.properties"))
         osu = Osu(config[Config.bot.osuToken])
+        tba = TBA(config[Config.bot.tbaKey])
 
         val commandHandler = CommandHandler()
         commandHandler.registerCommands(CommandReg().getCommands())
 
+        // clears cache when exits
+        Runtime.getRuntime().addShutdownHook(Thread { Data.clearCache() })
 
         jda = JDABuilder(AccountType.BOT)
                 .setToken(config[Config.bot.discordToken])
