@@ -8,5 +8,6 @@ class Config {
     object bot : PropertyGroup() {
         val discordToken by stringType
         val osuToken by stringType
+        val tbaKey by stringType
     }
 }
