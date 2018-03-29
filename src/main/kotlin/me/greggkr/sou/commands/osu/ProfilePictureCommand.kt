@@ -4,6 +4,7 @@ import me.diax.comportment.jdacommand.Command
 import me.diax.comportment.jdacommand.CommandDescription
 import me.greggkr.sou.Sou
 import me.greggkr.sou.osu.Mode
+import me.greggkr.sou.util.Data
 import me.greggkr.sou.util.Emoji
 import net.dv8tion.jda.core.entities.Message
 
@@ -26,7 +27,7 @@ class ProfilePictureCommand : Command {
             return
         }
 
-        val avatar = Sou.osu.getCachedProfilePicture(user.id, a)
+        val avatar = Data.getCachedProfilePicture(user.id, a)
         if (avatar == null) {
             channel.sendMessage("${Emoji.X} **User does not have an avatar.**")
             return

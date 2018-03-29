@@ -3,16 +3,11 @@ package me.greggkr.sou.osu
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import me.greggkr.sou.auth.OsuAuthenticator
+import me.greggkr.sou.osu.wrappers.Beatmap
 import me.greggkr.sou.osu.wrappers.User
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.apache.commons.io.FileUtils
 import org.json.JSONArray
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import java.io.File
-import java.net.SocketTimeoutException
-import java.net.URL
 
 class Osu(key: String) {
     private val baseUrl = "https://osu.ppy.sh/api"
@@ -27,6 +22,31 @@ class Osu(key: String) {
                 .get()
                 .build()
 
+//        val res = client.newCall(req).execute()
+//
+//        val body = res.body() ?: return null
+//
+//        val str = body.string()
+//
+//        if (jsonEmpty(str)) return null
+
+        val str = sendRequest(req) ?: return null
+
+        return gson.fromJson(str, Array<User>::class.java)[0]
+    }
+
+    fun getBeatmap(mode: Mode, id: Int): Beatmap? {
+        val req = Request.Builder()
+                .url("$baseUrl/get_beatmaps?m=${mode.apiValue}&u=$id")
+                .get()
+                .build()
+
+        val str = sendRequest(req) ?: return null
+
+        return gson.fromJson(str, Array<Beatmap>::class.java)[0]
+    }
+
+    private fun sendRequest(req: Request): String? {
         val res = client.newCall(req).execute()
 
         val body = res.body() ?: return null
@@ -35,7 +55,7 @@ class Osu(key: String) {
 
         if (jsonEmpty(str)) return null
 
-        return gson.fromJson(str, Array<User>::class.java)[0]
+        return str
     }
 
     private fun jsonEmpty(json: String): Boolean {
@@ -44,36 +64,5 @@ class Osu(key: String) {
         val array = JSONArray(json)
 
         return array.isNull(0)
-    }
-
-    fun getProfilePicture(user: String): String? {
-        lateinit var document: Document
-        try {
-            document = Jsoup.connect("https://osu.ppy.sh/u/$user")
-                    .userAgent("Dillo/2.0")
-                    .get()
-        } catch (e: SocketTimeoutException) {
-            return null
-        }
-
-        val errHolder = document.body().select(".paddingboth > h2")
-        if (errHolder.size != 0) {
-            if (errHolder[0].ownText().contains("The user you are looking for was not found!")) return null
-        }
-
-        if (document.body().select(".avatar-holder").size == 0) return null
-
-        return "https://${document.body().select(".avatar-holder > img").attr("src").substring(2)}"
-    }
-
-    fun getCachedProfilePicture(id: Int, user: String): File? {
-        val file = File("cache/$id.jpg")
-
-        if (file.exists()) return file
-
-        val url = getProfilePicture(user) ?: return null
-
-        FileUtils.copyURLToFile(URL(url), file)
-        return file
     }
 }

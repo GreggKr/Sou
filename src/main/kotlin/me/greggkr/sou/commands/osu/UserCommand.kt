@@ -22,7 +22,7 @@ class UserCommand : Command {
             return
         }
 
-        val avatar = Sou.osu.getProfilePicture(a)
+        val avatar = Data.getProfilePicture(a)
 
         if (avatar == null) {
             message.channel.sendMessage("user doesnt exist or doesnt have profile pic").queue()
@@ -38,7 +38,7 @@ class UserCommand : Command {
 
         message.channel.sendMessage(EmbedBuilder()
                 .setColor(Data.color)
-                .setThumbnail(Sou.osu.getProfilePicture(a))
+                .setThumbnail(avatar)
                 .addField("Info", "**Name**: ${user.name}\n" +
                         "**PP**: ${decFormat.format(user.pp)}\n" +
                         "**Rank**: ${user.rank}\n" +

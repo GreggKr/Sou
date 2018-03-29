@@ -1,6 +1,5 @@
 package me.greggkr.sou.auth
 
-import me.greggkr.sou.exceptions.OsuException
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -8,7 +7,7 @@ import okhttp3.Route
 
 class OsuAuthenticator(private val key: String) : Authenticator {
     init {
-        if (!key.matches(Regex("^[a-z0-9]{40}$"))) throw OsuException("Token is invalid.")
+        if (!key.matches(Regex("^[a-z0-9]{40}$"))) throw RuntimeException("Token is invalid.")
     }
 
     /**
@@ -22,7 +21,8 @@ class OsuAuthenticator(private val key: String) : Authenticator {
                         .request()
                         .url()
                         .newBuilder()
-                        .addQueryParameter("k", key).build())
+                        .addQueryParameter("k", key)
+                        .build())
                 .build()
     }
 }
